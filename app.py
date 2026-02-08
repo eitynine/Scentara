@@ -125,6 +125,48 @@ database_aroma = {
         "tips": "Pilihan terbaik jika kamu ingin tampil dengan 'Clean Girl/Boy Aesthetic'."
     },
 
+    "🌶️ Seblak / Bakso Aci / Sambal Setan (Pedas Ekstrem & Bawang)": {
+        "efek": "💦 **Hyperhidrosis & Sulfur:** Keringat mengucur deras karena capsaicin (cabai). Bawang putih/merah melepaskan senyawa *allicin* lewat pori-pori (bau tengik).",
+        "cocok": "🍋 **Citrus Kuat (Bergamot/Grapefruit) atau Aquatic:** Anda butuh kesegaran tajam untuk memotong aroma bawang dan mendinginkan kesan lengket.",
+        "larangan": "🍭 **Gourmand (Vanila/Cokelat/Karamel):** JANGAN! Aroma manis bercampur keringat bawang & pedas akan bikin pusing (enek) orang di sekitar.",
+        "tips": "Ganti baju jika keringat sudah tembus punggung. Parfum mahal pun tak bisa menutupi baju basah kuyup."
+    },
+    
+    "🫘 Jengkol / Pete / Durian (High Sulfur)": {
+        "efek": "⚠️ **Bahaya Kimiawi:** Mengandung senyawa sulfur (belerang) tinggi. Baunya tidak hanya di mulut, tapi keluar samar lewat pori-pori kulit & napas.",
+        "cocok": "🍃 **Aromatic Green, Mint, Eucalyptus, atau Tea:** Cari parfum yang wanginya 'bersih', 'dingin', dan herbal untuk menetralisir bau sulfur.",
+        "larangan": "🌹 **Tuberose (Sedap Malam) atau Animalic Musk:** Aroma yang terlalu 'hewani' atau bunga yang menyengat akan bertabrakan parah dengan sulfur.",
+        "tips": "Mandi dengan sabun antiseptik (Dettol/Lifebuoy) wajib hukumnya sebelum pakai parfum. Kunyah biji kopi atau permen mint kuat."
+    },
+    
+    "🦐 Sambal Terasi / Ikan Asin / Seafood": {
+        "efek": "🐟 **Aroma Amis/Fermentasi:** Protein laut dan fermentasi terasi bisa meninggalkan jejak aroma 'fishy' atau amis tipis pada keringat.",
+        "cocok": "🌊 **Marine, Sea Salt, atau Citrus Neroli:** Parfum bernuansa laut atau jeruk nipis sangat efektif menyamarkan aroma amis (seperti jeruk nipis pada ikan bakar).",
+        "larangan": "🦌 **Musk (Kesturi) Berat:** Musk bereaksi dengan aroma amis kulit menjadi bau yang 'kotor' dan tidak segar.",
+        "tips": "Cuci tangan dengan sabun stainless steel atau gosokkan lemon ke jari tangan sebelum menyentuh area leher."
+    },
+    
+    "🍢 Sate Kambing / Sop Kaki (Lemak Hewani Tinggi)": {
+        "efek": "🐐 **Keto-Scent:** Pencernaan daging merah berlemak menghasilkan residu amonia yang membuat keringat berbau tajam/pesing jika tidak biasa.",
+        "cocok": "🪵 **Sandalwood (Cendana) atau Spicy (Lada Hitam/Kapulaga):** Aroma kayu cendana yang creamy bisa menyeimbangkan tajamnya aroma residu daging.",
+        "larangan": "🍉 **Fruity (Semangka/Melon):** Aroma buah air yang manis akan terasa sangat artifisial dan aneh jika bercampur aroma lemak daging.",
+        "tips": "Gunakan deodoran *antiperspirant* (bukan cuma *deodorant*) yang mengandung aluminium klorida untuk menahan ketiak basah."
+    },
+    
+    "🥗 Gado-gado / Karedok / Sayur Asem (Bumbu Kacang & Sayur)": {
+        "efek": "✅ **Netral / Aman:** Sayuran dan bumbu kacang relatif aman. Kecuali jika terlalu banyak bawang mentah di bumbunya.",
+        "cocok": "🌼 **Floral, Fruity, atau Skin Scent:** Ini saatnya memakai parfum harian favoritmu yang ringan dan segar.",
+        "larangan": "❌ **Hampir Tidak Ada:** Tubuh dalam kondisi pH seimbang. Bebas eksplorasi wangi!",
+        "tips": "Kondisi aman. Semprot parfum di titik nadi (nadi tangan, belakang telinga) agar lebih menyebar."
+    },
+    
+    "🍜 Mie Instan / Gorengan (MSG & Minyak Goreng)": {
+        "efek": "🛢️ **Oily Sweat:** Kandungan pengawet dan minyak jenuh membuat kulit terasa lebih berminyak, parfum jadi cepat menguap (tidak tahan lama).",
+        "cocok": "Eau de Parfum (EDP) konsentrasi tinggi. Pilih wangi **Clean Laundry / Aldehyde** (Wangi sabun/baju bersih).",
+        "larangan": "Eau de Cologne (EDC) alkohol tinggi: Akan makin cepat hilang.",
+        "tips": "Gunakan *body lotion* tanpa wangi dulu di kulit agar parfum lebih menempel di kulit berminyak."
+    },
+    
     # --- MAKANAN SUMATERA ---
     "🍛 [SUMATERA] Rendang, Mie Aceh, Gulai Malbi": {
         "efek": "🔥 **Rempah Sangat Kuat:** Campuran lada, kapulaga, dan santan kental membuat keringat lebih tajam dan berminyak.",
