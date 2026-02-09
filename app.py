@@ -244,8 +244,6 @@ if selected_food and selected_food != "--- PILIH KATEGORI MAKANAN ---":
         st.error(f"❌ **HINDARI:**\n\n{data['larangan']}")
         
     st.warning(f"💡 **TIPS EXTRA:**\n{data['tips']}")
-# --- LOGIKA TOMBOL AFFILIATE OTOMATIS (VERSI LENGKAP) ---
-st.markdown("### 🛍️ Rekomendasi Parfum Untukmu")
 
 # --- LOGIKA TOMBOL AFFILIATE OTOMATIS (VERSI LENGKAP) ---
 st.markdown("### 🛍️ Rekomendasi Parfum Untukmu")
