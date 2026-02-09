@@ -295,8 +295,9 @@ for key in affiliate_links:
         break
 
 if not found_link:
-    # Default jika tidak ada keyword yang cocok
-    st.link_button("✨ Lihat Koleksi Parfum Terlaris 2026", "https://shope.ee/link_affiliate_umum")
+    # Menggunakan link Toko Resmi HMNS yang sudah jadi affiliate
+    st.write("Makananmu cenderung netral, tapi tetap tampil wangi dengan pilihan terbaik dari brand lokal terpopuler:")
+    st.link_button("✨ Lihat Koleksi Parfum HMNS (Shopee Mall)", "https://s.shopee.co.id/7fUE9iRwGr")
     
 # --- DISCLAIMER (Sesuai Permintaan) ---
 st.markdown(f"""
