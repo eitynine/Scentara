@@ -244,7 +244,62 @@ if selected_food and selected_food != "--- PILIH KATEGORI MAKANAN ---":
         st.error(f"❌ **HINDARI:**\n\n{data['larangan']}")
         
     st.warning(f"💡 **TIPS EXTRA:**\n{data['tips']}")
+# --- LOGIKA TOMBOL AFFILIATE OTOMATIS (VERSI LENGKAP) ---
+st.markdown("### 🛍️ Rekomendasi Parfum Untukmu")
 
+# --- LOGIKA TOMBOL AFFILIATE OTOMATIS (VERSI LENGKAP) ---
+st.markdown("### 🛍️ Rekomendasi Parfum Untukmu")
+
+# Mapping Keyword Makanan ke Produk Spesifik (Range 100k - 200k)
+affiliate_links = {
+    # Kelompok Bakso, Mie Ayam, Mie Goreng, Nasi Goreng (Masalah: Bau Lemak & Bawang Goreng)
+    "Bakso": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+    "Mie Ayam": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+    "Nasi Goreng": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+    "Mie Goreng": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+    "Bakmi": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+    
+    # Kelompok Rempah Berat
+    "Rendang": ("Nifty Twice - True Oud", "https://s.shopee.co.id/1LaAZQDs7a"),
+    "Gulai": ("Nifty Twice - True Oud", "https://s.shopee.co.id/1LaAZQDs7a"),
+    
+    # Kelompok Pedas Panas (Masalah: Keringat Berlebih)
+    "Seblak": ("Octarine - Bulgy Aqua", "https://s.shopee.co.id/8zzbhez88C"),
+    "Sambal": ("Octarine - Bulgy Aqua", "https://s.shopee.co.id/8zzbhez88C"),
+    
+    # Kelompok Bau Tajam
+    "Jengkol": ("Uchi - Green Tea", "https://s.shopee.co.id/3fy5M0SrNA"),
+    "Pete": ("Uchi - Green Tea", "https://s.shopee.co.id/3fy5M0SrNA"),
+    
+    # Kelompok Amis
+    "Seafood": ("Bali Surfers - Blue Point", "https://s.shopee.co.id/8fMlJHpOHj"),
+    "Pempek": ("Bali Surfers - Blue Point", "https://s.shopee.co.id/8fMlJHpOHj"),
+    
+    # Kelompok Kambing/Daging
+    "Sate Kambing": ("Carl & Claire - Black Orchid", "https://s.shopee.co.id/gKTmg8xxw"),
+    "Konro": ("Carl & Claire - Black Orchid", "https://s.shopee.co.id/gKTmg8xxw"),
+
+    # Kelompok Sayuran & Bumbu Kacang (Masalah: Bau Bawang Putih Mentah & Gurih Kacang)
+    "Gado-gado": ("Mine. Perfumery - Floratopia", "https://s.shopee.co.id/8pgBW79rHy"),
+    "Karedok": ("Mine. Perfumery - Floratopia", "https://s.shopee.co.id/8pgBW79rHy"),
+    "Lotek": ("Mine. Perfumery - Floratopia", "https://s.shopee.co.id/8pgBW79rHy"),
+    "Sayur": ("Mine. Perfumery - Floratopia", "https://s.shopee.co.id/8pgBW79rHy"),
+}
+
+# Cek apakah ada kata kunci di dalam 'selected_food' yang cocok dengan database affiliate
+found_link = False
+for key in affiliate_links:
+    if key.lower() in selected_food.lower():
+        name, url = affiliate_links[key]
+        st.write(f"Setelah makan **{key}**, tubuhmu butuh penetral aroma. Coba ini:")
+        st.link_button(f"🚀 Beli {name} di Shopee", url)
+        found_link = True
+        break
+
+if not found_link:
+    # Default jika tidak ada keyword yang cocok
+    st.link_button("✨ Lihat Koleksi Parfum Terlaris 2026", "https://shope.ee/link_affiliate_umum")
+    
 # --- DISCLAIMER (Sesuai Permintaan) ---
 st.markdown(f"""
     <div class="disclaimer-box">
