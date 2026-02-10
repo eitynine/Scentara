@@ -9,17 +9,18 @@ st.set_page_config(
 )
 
 # ==========================================
-#  CUSTOM CSS: LUXURY & GLASSMORPHISM
+#  CUSTOM CSS: HIGH CONTRAST LUXURY
 # ==========================================
 st.markdown("""
     <style>
     /* IMPORT FONT MEWAH */
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@300;400;700&display=swap');
 
-    /* 1. BACKGROUND GRADASI PREMIUM */
+    /* 1. BACKGROUND GRADASI LEBIH PEKAT (AGAR TEKS JELAS) */
     .stApp {
-        background: linear-gradient(160deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
-        color: #E0E0E0;
+        /* Gradasi dari Hitam Navy ke Deep Purple - Kontras tinggi untuk teks putih */
+        background: linear-gradient(180deg, #050505 0%, #0B1021 50%, #1B1430 100%);
+        color: #FFFFFF; /* Mengubah dari abu-abu (#E0E0E0) ke Putih Murni */
         font-family: 'Lato', sans-serif;
     }
     
@@ -27,16 +28,16 @@ st.markdown("""
     .main-header {
         font-family: 'Playfair Display', serif;
         font-size: 3.8rem;
-        color: #E94560;
+        color: #FF4B6E; /* Warna sedikit lebih terang dari sebelumnya agar pop */
         text-align: center;
         font-weight: 700;
-        text-shadow: 0px 0px 20px rgba(233, 69, 96, 0.4);
+        text-shadow: 0px 0px 25px rgba(255, 75, 110, 0.6);
         margin-bottom: 0px;
     }
     .sub-header {
         font-size: 1.1rem;
         text-align: center;
-        color: #B2B2B2;
+        color: #D1D5DB; /* Abu-abu terang */
         letter-spacing: 2px;
         margin-bottom: 3rem;
         text-transform: uppercase;
@@ -44,29 +45,32 @@ st.markdown("""
 
     /* 3. INPUT BOX STYLING */
     .stSelectbox > div > div {
-        background-color: rgba(255, 255, 255, 0.1) !important;
+        background-color: rgba(0, 0, 0, 0.5) !important; /* Background input lebih gelap */
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         color: white !important;
         border-radius: 8px;
     }
 
-    /* 4. RESULT CARDS (GLASSMORPHISM) */
+    /* 4. RESULT CARDS (PERBAIKAN UTAMA DISINI) */
     .result-card {
-        background: rgba(255, 255, 255, 0.05);
+        /* UBAH DARI BASIS PUTIH KE BASIS HITAM TRANSPARAN */
+        /* Ini membuat teks putih di dalamnya jauh lebih mudah dibaca */
+        background: rgba(0, 0, 0, 0.4); 
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15); /* Border sedikit dipertegas */
+        padding: 25px; /* Padding ditambah sedikit */
         margin-bottom: 20px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
     }
     
     /* 5. TYPOGRAPHY DALAM CARD */
-    h3 { color: #E94560 !important; font-family: 'Playfair Display', serif; }
-    h4 { color: #FFFFFF !important; margin-top: 10px; }
-    strong { color: #FFD700; } /* Warna Emas untuk penekanan */
+    h3 { color: #FF6B88 !important; font-family: 'Playfair Display', serif; text-shadow: 0px 0px 10px rgba(0,0,0,0.5); }
+    h4 { color: #F3F4F6 !important; margin-top: 10px; font-weight: 700; }
+    p, li { line-height: 1.6; font-size: 1.05rem; } /* Jarak baris diperlebar agar enak dibaca */
+    strong { color: #FFD700; font-weight: 700; } 
 
     /* 6. BUTTON CUSTOM */
     .stButton>button {
@@ -77,24 +81,41 @@ st.markdown("""
         padding: 10px 25px;
         font-weight: bold;
         transition: 0.3s;
+        border: 1px solid rgba(255,255,255,0.2);
     }
     .stButton>button:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(233, 69, 96, 0.6);
+        box-shadow: 0 0 20px rgba(233, 69, 96, 0.8);
+    }
+    
+    /* 7. TAB STYLE (Agar tulisan di Tab juga jelas) */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 10px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        white-space: pre-wrap;
+        background-color: rgba(0,0,0,0.3);
+        border-radius: 5px;
+        color: #FFFFFF;
+        font-weight: 600;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: rgba(233, 69, 96, 0.2);
+        border-bottom: 2px solid #E94560;
     }
     
     /* DISCLAIMER */
     .disclaimer {
         font-size: 0.8rem;
-        color: #666;
+        color: #9CA3AF;
         text-align: center;
         margin-top: 50px;
-        border-top: 1px solid #333;
+        border-top: 1px solid #374151;
         padding-top: 20px;
     }
     </style>
 """, unsafe_allow_html=True)
-
 # --- DATABASE INTELEGENSIA AROMA (EXPANDED & FACTUAL) ---
 # Format Data:
 # - mechanism: Penjelasan ilmiah (Biologi/Kimia)
