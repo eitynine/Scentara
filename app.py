@@ -1,147 +1,121 @@
 import streamlit as st
 
-# --- KONFIGURASI HALAMAN ---
+# 1. SET PAGE CONFIG
 st.set_page_config(
     page_title="Scentara Premium",
     page_icon="💎",
-    layout="centered",
-    initial_sidebar_state="collapsed"
+    layout="centered"
 )
 
-# ==========================================
-#  CUSTOM CSS (VARIABLE DEFINITION)
-# ==========================================
-custom_css = """
-    <style>
-    /* IMPORT FONT */
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@300;400;700&display=swap');
-
-    /* 1. BACKGROUND GRADASI DEEP */
+# 2. CSS STYLE (DIPISAH AGAR AMAN)
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap');
+    
     .stApp {
         background: linear-gradient(180deg, #020010 0%, #080C1F 50%, #111827 100%);
         color: #FFFFFF;
         font-family: 'Lato', sans-serif;
     }
-    
-    /* 2. HEADER STYLE */
     .main-header {
         font-family: 'Playfair Display', serif;
         font-size: 3.5rem;
         color: #FF4B6E; 
         text-align: center;
-        font-weight: 700;
-        text-shadow: 0px 0px 25px rgba(255, 75, 110, 0.5);
-        margin-top: 10px;
+        text-shadow: 0px 0px 20px rgba(255, 75, 110, 0.5);
     }
-    .sub-header {
-        font-size: 1.1rem;
-        text-align: center;
-        color: #9CA3AF;
-        letter-spacing: 3px;
-        margin-bottom: 2.5rem;
-        text-transform: uppercase;
-        font-weight: 300;
-    }
-
-    /* 3. INPUT BOX STYLING */
-    .stSelectbox > div > div {
-        background-color: rgba(20, 20, 30, 0.8) !important;
-        border: 1px solid #FF4B6E;
-        color: white !important;
-        border-radius: 8px;
-    }
-    /* Dropdown items */
-    div[data-baseweb="select"] ul {
-        background-color: #0F172A !important;
-        color: white !important;
-    }
-
-    /* 4. RESULT CARDS */
     .result-card {
         background: rgba(0, 0, 0, 0.6);
         backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 25px;
+        padding: 20px;
         margin-bottom: 20px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
-    
-    /* 5. TYPOGRAPHY */
-    h3 { color: #FF8BA7 !important; font-family: 'Playfair Display', serif; margin-bottom: 15px; }
-    h4 { color: #E5E7EB !important; font-weight: 700; margin-top: 10px; }
-    p, li { line-height: 1.7; color: #D1D5DB; font-size: 1rem; }
-    strong { color: #FFD700; font-weight: 700; } 
+    h3 { color: #FF8BA7 !important; }
+    strong { color: #FFD700; }
+</style>
+""", unsafe_allow_html=True)
 
-    /* 6. BUTTON CUSTOM */
-    .stButton>button {
-        background: linear-gradient(90deg, #D61C4E 0%, #990033 100%);
-        color: white;
-        border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 8px;
-        padding: 0.5rem 1rem;
-        width: 100%;
-        transition: 0.3s;
-    }
-    .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(214, 28, 78, 0.5);
-    }
-    
-    /* 7. TAB STYLE */
-    .stTabs [data-baseweb="tab-list"] { gap: 8px; }
-    .stTabs [data-baseweb="tab"] {
-        background-color: rgba(255,255,255,0.05);
-        border-radius: 5px;
-        color: #9CA3AF;
-        font-size: 0.9rem;
-    }
-    .stTabs [aria-selected="true"] {
-        background-color: rgba(214, 28, 78, 0.2);
-        color: #FFFFFF;
-        border: 1px solid #D61C4E;
-    }
-    
-    /* DISCLAIMER */
-    .disclaimer {
-        font-size: 0.75rem;
-        color: #6B7280;
-        text-align: center;
-        margin-top: 40px;
-        padding-top: 20px;
-        border-top: 1px solid #1F2937;
-    }
-    </style>
-"""
-st.markdown(custom_css, unsafe_allow_html=True)
-
-# --- DATABASE INTELEGENSIA AROMA ---
-database_premium = {
-    "🥩 Daging Merah & Berlemak (Sate/Steak/Rendang)": {
-        "mechanism": """
-        **Efek Thermogenesis:** Mencerna protein tinggi meningkatkan suhu tubuh.
-        Residu lemak dan asam amino menciptakan suasana kulit yang *basal* dan sedikit 'animalic'.
-        """,
-        "pairing_logic": "Gunakan wangi **Spicy & Woody** yang tebal untuk menyeimbangkan aroma natural tubuh yang sedang kuat.",
-        "recommended_notes": """
-        * **Utama:** Oud (Gaharu), Black Pepper, Leather.
-        * **Pendukung:** Patchouli, Saffron.
-        * **Vibe:** Mewah, Bold, Timur Tengah.
-        """,
-        "avoid_notes": "❌ **Vanilla Manis & Buah-buahan:** Akan bikin pusing jika campur keringat lemak.",
-        "ritual": "Semprot parfum di baju (bahu & dada) lebih banyak daripada di kulit langsung.",
-        "product_category": "bold"
+# 3. DATABASE (STRUKTUR FLAT AGAR TIDAK ERROR)
+db = {
+    "🥩 Daging Merah (Sate/Steak)": {
+        "m": "Protein tinggi meningkatkan suhu tubuh (Thermogenesis).",
+        "l": "Butuh aroma Spicy & Wood agar tidak kalah dengan bau tubuh.",
+        "r": "Oud, Pepper, Leather.",
+        "a": "Vanilla manis (bikin mual).",
+        "cat": "bold"
     },
+    "🧄 Bawang & Rempah (Kari/Sambal)": {
+        "m": "Sulfur bawang keluar lewat pori-pori selama 24 jam.",
+        "l": "Gunakan Citrus tajam untuk 'memotong' aroma sulfur.",
+        "r": "Bergamot, Lemon, Mint.",
+        "a": "Bunga Melati/Mawar (indolic).",
+        "cat": "fresh"
+    },
+    "🐟 Seafood (Ikan Bakar/Sushi)": {
+        "m": "Zat Trimethylamine menyebabkan aroma amis di kulit.",
+        "l": "Gunakan wangi Laut/Aquatic sebagai penetral alami.",
+        "r": "Sea Salt, Lime, Sage.",
+        "a": "Musk hewani (bikin apek).",
+        "cat": "fresh"
+    },
+    "☕ Kopi & Alkohol": {
+        "m": "Efek dehidrasi membuat kulit kering dan parfum cepat hilang.",
+        "l": "Gunakan wangi manis (Gourmand) yang punya daya rekat kuat.",
+        "r": "Coffee, Vanilla, Tonka Bean.",
+        "a": "Cologne ringan (cepat uap).",
+        "cat": "sweet"
+    },
+    "🥗 Sayur & Vegan (Salad)": {
+        "m": "Tubuh lebih bersih dan netral. Kanvas terbaik.",
+        "l": "Gunakan wangi Clean/Floral untuk kesan elegan.",
+        "r": "White Musk, Jasmine, Pear.",
+        "a": "Tidak ada pantangan.",
+        "cat": "clean"
+    }
+}
 
-    "🧄 Bawang & Rempah Tajam (Kari/Gulai/Sambal)": {
-        "mechanism": """
-        **Senyawa Sulfur:** Aroma bawang keluar lewat pori-pori kulit selama 24 jam.
-        Ini membuat aroma tubuh menjadi 'hangat' dan tajam.
-        """,
-        "pairing_logic": "Lawan panas dengan dingin. Potong bau bawang dengan **Citrus Tajam** atau **Mint**.",
-        "recommended_notes": """
-        * **Utama:** Bergamot, Lemon, Peppermint.
-        * **Pendukung:** Vetiver (Akar Wangi), Ginger.
-        * **Vibe:** Segar, Bersih, Professional.
-        """,
+# 4. TAMPILAN
+st.markdown('<h1 class="main-header">SCENTARA</h1>', unsafe_allow_html=True)
+st.markdown('<p style="text-align:center; color:#9CA3AF;">The Scent Sommelier Premium</p>', unsafe_allow_html=True)
+
+menu = st.selectbox("Apa yang Anda makan hari ini?", ["-- Pilih --"] + list(db.keys()))
+
+if menu != "-- Pilih --":
+    data = db[menu]
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown(f'<div class="result-card"><h3>🔬 Analisa</h3><p>{data["m"]}</p><p><b>Logika:</b> {data["l"]}</p></div>', unsafe_allow_html=True)
+    with col2:
+        st.markdown(f'<div class="result-card"><h3>✅ Rekomendasi</h3><p><strong>Notes:</strong> {data["r"]}</p><p><strong>Hindari:</strong> {data["a"]}</p></div>', unsafe_allow_html=True)
+
+    st.divider()
+    st.subheader("🛍️ Rekomendasi Produk (< 200rb)")
+    
+    # LOGIKA PRODUK
+    c = data["cat"]
+    if c == "bold":
+        p1, l1 = "Kahf Revered Oud", "https://shopee.co.id/search?keyword=kahf%20revered%20oud"
+        p2, l2 = "Saff & Co S.O.T.B", "https://shopee.co.id/search?keyword=saff%20and%20co%20sotb"
+    elif c == "fresh":
+        p1, l1 = "Onix Mexicola", "https://shopee.co.id/search?keyword=onix%20mexicola"
+        p2, l2 = "Kahf Humbling Forest", "https://shopee.co.id/search?keyword=kahf%20humbling%20forest"
+    elif c == "sweet":
+        p1, l1 = "Mykonos Vanilla Clouds", "https://shopee.co.id/search?keyword=mykonos%20vanilla%20clouds"
+        p2, l2 = "HMNS Orgsm", "https://shopee.co.id/search?keyword=hmns%20orgsm"
+    else:
+        p1, l1 = "Lilith & Eve Daisy", "https://shopee.co.id/search?keyword=lilith%20and%20eve%20daisy"
+        p2, l2 = "Miniso Garden of Mirror", "https://shopee.co.id/search?keyword=miniso%20garden%20of%20mirror"
+
+    cp1, cp2 = st.columns(2)
+    with cp1:
+        st.markdown(f'<div class="result-card" style="text-align:center;"><h4>{p1}</h4></div>', unsafe_allow_html=True)
+        st.link_button(f"Cek {p1}", l1)
+    with cp2:
+        st.markdown(f'<div class="result-card" style="text-align:center;"><h4>{p2}</h4></div>', unsafe_allow_html=True)
+        st.link_button(f"Cek {p2}", l2)
+
+else:
+    st.info("Silakan pilih menu makanan untuk memulai.")
