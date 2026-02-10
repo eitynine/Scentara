@@ -1,296 +1,625 @@
 import streamlit as st
 
-# --- KONFIGURASI HALAMAN (PREMIUM TIER) ---
+
+
+# --- KONFIGURASI HALAMAN ---
+
 st.set_page_config(
-    page_title="Scentara Premium - The Scent Sommelier",
-    page_icon="💎",
-    layout="centered",
-    initial_sidebar_state="collapsed"
+
+    page_title="Scentara - Personal Scent Guide",
+
+    page_icon="👃",
+
+    layout="centered"
+
 )
 
+
+
 # ==========================================
-#  CUSTOM CSS: LUXURY & GLASSMORPHISM
+
+#  CUSTOM CSS BACKGROUND & STYLE PREMIUM
+
 # ==========================================
+
 st.markdown("""
-    <style>
-    /* IMPORT FONT MEWAH */
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@300;400;700&display=swap');
 
-    /* 1. BACKGROUND GRADASI PREMIUM */
-    .stApp {
-        background: linear-gradient(160deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
-        color: #E0E0E0;
-        font-family: 'Lato', sans-serif;
-    }
-    
-    /* 2. HEADER STYLE */
-    .main-header {
-        font-family: 'Playfair Display', serif;
-        font-size: 3.8rem;
-        color: #E94560;
-        text-align: center;
-        font-weight: 700;
-        text-shadow: 0px 0px 20px rgba(233, 69, 96, 0.4);
-        margin-bottom: 0px;
-    }
-    .sub-header {
-        font-size: 1.1rem;
-        text-align: center;
-        color: #B2B2B2;
-        letter-spacing: 2px;
-        margin-bottom: 3rem;
-        text-transform: uppercase;
-    }
+    <style>
 
-    /* 3. INPUT BOX STYLING */
-    .stSelectbox > div > div {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: white !important;
-        border-radius: 8px;
-    }
+    /* 1. BACKGROUND UTAMA GRADASI */
 
-    /* 4. RESULT CARDS (GLASSMORPHISM) */
-    .result-card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    }
-    
-    /* 5. TYPOGRAPHY DALAM CARD */
-    h3 { color: #E94560 !important; font-family: 'Playfair Display', serif; }
-    h4 { color: #FFFFFF !important; margin-top: 10px; }
-    strong { color: #FFD700; } /* Warna Emas untuk penekanan */
+    .stApp {
 
-    /* 6. BUTTON CUSTOM */
-    .stButton>button {
-        background: linear-gradient(90deg, #E94560 0%, #C81D48 100%);
-        color: white;
-        border: none;
-        border-radius: 25px;
-        padding: 10px 25px;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    .stButton>button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(233, 69, 96, 0.6);
-    }
-    
-    /* DISCLAIMER */
-    .disclaimer {
-        font-size: 0.8rem;
-        color: #666;
-        text-align: center;
-        margin-top: 50px;
-        border-top: 1px solid #333;
-        padding-top: 20px;
-    }
-    </style>
+        background: linear-gradient(135deg, #FF9966 0%, #FF5E62 100%); /* Gradasi Oranye-Merah Hangat */
+
+        background-attachment: fixed; /* Agar background tidak ikut scroll */
+
+    }
+
+    
+
+    /* 2. MEMPERCANTIK KOTAK INPUT */
+
+    .stSelectbox > div > div {
+
+        background-color: rgba(255, 255, 255, 0.8) !important; /* Putih transparan */
+
+        border-radius: 10px !important;
+
+        color: #333 !important;
+
+    }
+
+    .stSelectbox label {
+
+        color: white !important; /* Warna label input jadi putih */
+
+        font-weight: bold;
+
+    }
+
+
+
+    /* 3. STYLE EFEK KACA UNTUK SEMUA BOX INFORMASI (Glassmorphism) */
+
+    .stAlert {
+
+        background-color: rgba(255, 255, 255, 0.85) !important; /* Efek kaca transparan */
+
+        backdrop-filter: blur(10px); /* Efek blur di belakang box */
+
+        border-radius: 12px !important;
+
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        color: #2c3e50 !important; /* Warna teks di dalam box jadi gelap agar terbaca */
+
+    }
+
+    /* Khusus box Sukses (Hijau) */
+
+    .stAlert[data-testid="stAlertSuccess"] { border-left: 5px solid #2ecc71 !important; }
+
+    /* Khusus box Error (Merah) */
+
+    .stAlert[data-testid="stAlertError"] { border-left: 5px solid #e74c3c !important; }
+
+    /* Khusus box Info (Biru) */
+
+    .stAlert[data-testid="stAlertInfo"] { border-left: 5px solid #3498db !important; }
+
+    /* Khusus box Warning (Kuning) */
+
+    .stAlert[data-testid="stAlertWarning"] { border-left: 5px solid #f1c40f !important; }
+
+
+
+    /* 4. STYLE HEADER YANG LEBIH MENONJOL */
+
+    .main-header {
+
+        font-size: 3.5rem;
+
+        color: #FFFFFF; /* Warna teks putih */
+
+        text-align: center;
+
+        font-weight: 800;
+
+        margin-top: 20px;
+
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Bayangan agar teks pop-out */
+
+    }
+
+    .sub-header {
+
+        font-size: 1.2rem;
+
+        text-align: center;
+
+        color: #F0F0F0; /* Putih gading */
+
+        margin-bottom: 3rem;
+
+    }
+
+
+
+    /* 5. STYLE DISCLAIMER BOX KHUSUS */
+
+    .disclaimer-box {
+
+        background-color: rgba(255, 235, 238, 0.9); /* Merah muda transparan */
+
+        padding: 15px;
+
+        border: 2px solid #ffcccb;
+
+        border-radius: 10px;
+
+        font-size: 0.9rem;
+
+        color: #c0392b;
+
+        margin-top: 30px;
+
+        text-align: center;
+
+    }
+
+    
+
+    /* 6. STYLE CAPTION FOOTER */
+
+    .stCaption {
+
+        color: rgba(255,255,255,0.7) !important;
+
+        text-align: center;
+
+    }
+
+    
+
+    /* 7. JUDUL HASIL ANALISA */
+
+    h3 {
+
+        color: white !important;
+
+        text-align: center;
+
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+
+    }
+
+    
+
+    /* Garis pemisah (Divider) jadi putih transparan */
+
+    hr { border-color: rgba(255,255,255,0.4) !important; }
+
+
+
+    </style>
+
 """, unsafe_allow_html=True)
 
-# --- DATABASE INTELEGENSIA AROMA (EXPANDED & FACTUAL) ---
-# Format Data:
-# - mechanism: Penjelasan ilmiah (Biologi/Kimia)
-# - pairing_logic: Mengapa notes tertentu dipilih
-# - recommended_notes: Notes spesifik
-# - avoid_notes: Notes yang dilarang & alasannya
-# - ritual: Tips detail sebelum/sesudah pakai parfum
+# ==========================================
 
-database_premium = {
-    "🥩 Daging Merah & Berlemak (Sate Kambing/Rendang/Steak)": {
-        "mechanism": """
-        **Efek Metabolik:** Mencerna daging merah membutuhkan energi tinggi (Thermogenesis), memicu keringat lebih banyak. 
-        Residu asam amino memecah menjadi amonia, mengubah pH kulit menjadi lebih basa (alkali), membuat parfum floral/fruity cepat rusak baunya.
-        """,
-        "pairing_logic": "Anda membutuhkan notes yang 'berat' dan earthy untuk menyamarkan residu amonia, atau notes rempah untuk menyeimbangkan karakter 'animalic' tubuh.",
-        "recommended_notes": """
-        * **Top Notes:** Black Pepper, Cardamom (Menyamarkan tajamnya bau keringat).
-        * **Heart/Base:** Oud (Gaharu), Leather, Patchouli, atau Sandalwood.
-        * **Genre:** *Spicy Amber* atau *Woody Aromatic*.
-        """,
-        "avoid_notes": "❌ **Sweet Gourmand (Vanilla/Caramel) & Aquatic:** Aroma manis gula akan berbenturan dengan aroma residu lemak, menciptakan efek bau 'tengik' atau mual.",
-        "ritual": "Gunakan deodoran *antiperspirant* (bukan hanya deodoran) di malam hari sebelumnya. Semprot parfum di baju (fabric) lebih banyak daripada di kulit langsung."
-    },
+# AKHIR STYLE CUSTOM
 
-    "🧄 Bawang & Rempah Tajam (Sambal/Gulai/Kari)": {
-        "mechanism": """
-        **Senyawa Sulfur (Belerang):** Bawang putih/merah mengandung *Allicin* yang dipecah tubuh menjadi *Allyl Methyl Sulfide (AMS)*. 
-        Senyawa ini TIDAK bisa dicerna total, melainkan dikeluarkan lewat darah -> paru-paru (napas) & pori-pori kulit selama 24 jam.
-        """,
-        "pairing_logic": "Lawan 'panas' dengan 'dingin' atau potong bau sulfur dengan ketajaman sitrus (Citrus cuts through fat and sulfur).",
-        "recommended_notes": """
-        * **Top Notes:** Bergamot, Grapefruit, Lemon, Mint, Eucalyptus.
-        * **Heart/Base:** Vetiver (Akar Wangi), Cedarwood.
-        * **Genre:** *Citrus Aromatic* atau *Fougere*.
-        """,
-        "avoid_notes": "❌ **Heavy Rose & Tuberose:** Bunga yang baunya 'indolic' (sedikit kotor/hewani) akan memperparah bau sulfur dari bawang. Hindari juga *Oud* murah.",
-        "ritual": "Minum air lemon hangat. Jangan gosok parfum di pergelangan tangan (gesekan memecah molekul top notes yang bertugas melawan bau bawang)."
-    },
+# ==========================================
 
-    "🐟 Seafood & Terasi (Ikan Bakar/Seafood Saus Padang)": {
-        "mechanism": """
-        **Trimethylamine:** Senyawa alami pada hasil laut yang memberikan aroma 'amis'. 
-        Saat bercampur dengan bakteri kulit, ia menghasilkan aroma amonia tipis. Tubuh juga cenderung memproduksi minyak berlebih jika seafood digoreng.
-        """,
-        "pairing_logic": "Gunakan prinsip kuliner: Ikan diberi jeruk nipis untuk hilang amisnya. Prinsip ini berlaku sama di parfum.",
-        "recommended_notes": """
-        * **Top Notes:** Neroli, Lime, Sea Salt, Mandarin Orange.
-        * **Heart/Base:** Sage, Ambergris (Notes laut sintetis).
-        * **Genre:** *Aquatic* atau *Citrus Marine*.
-        """,
-        "avoid_notes": "❌ **Musk & Animalic:** Musk bereaksi dengan residu protein laut menjadi aroma yang 'kotor' dan apek.",
-        "ritual": "Cuci area leher dengan sabun wajah sebelum re-spray parfum. Pastikan tangan steril dari bau amis sebelum menyentuh botol parfum."
-    },
 
-    "☕ Kopi & Alkohol (Kafein Tinggi/Cocktail)": {
-        "mechanism": """
-        **Dehidrasi & Asiditas:** Alkohol dan kafein bersifat diuretik (membuang cairan), membuat mulut kering (halitosis) dan kulit kering. 
-        Kulit kering tidak bisa menahan wangi parfum lama-lama (poor longevity).
-        """,
-        "pairing_logic": "Karena kulit kering, Anda butuh parfum konsentrasi tinggi (Extrait/EDP) dengan base notes yang lengket (resinous).",
-        "recommended_notes": """
-        * **Top Notes:** Coffee, Dark Chocolate, Rum.
-        * **Heart/Base:** Vanilla, Tonka Bean, Tobacco.
-        * **Genre:** *Gourmand* atau *Boozy*.
-        """,
-        "avoid_notes": "❌ **Light Citrus/Eau de Cologne:** Akan menguap dalam hitungan menit karena kulit tidak punya kelembapan untuk mengikatnya.",
-        "ritual": "Wajib pakai *Unscented Body Lotion* atau *Petroleum Jelly* di titik nadi sebelum semprot parfum untuk mengunci wangi."
-    },
 
-    "🥦 Sayuran, Buah & Vegan (Gado-gado/Salad)": {
-        "mechanism": """
-        **Detoksifikasi Alami:** Klorofil dan serat membantu membersihkan racun tubuh. pH tubuh cenderung seimbang dan keringat tidak berbau tajam. 
-        Ini adalah 'kanvas bersih' untuk parfum.
-        """,
-        "pairing_logic": "Tubuh Anda netral. Ini saatnya memakai parfum yang *complex* atau *delicate* yang biasanya kalah jika dipakai saat berkeringat.",
-        "recommended_notes": """
-        * **Bebas Eksplorasi:** White Floral (Jasmine/Gardenia), Fruity, atau Skin Scents (Iso E Super).
-        * **Genre:** *Floral Aldehyde* atau *Musky*.
-        """,
-        "avoid_notes": "❌ **Tidak Ada:** Hampir semua jenis parfum akan tercium *true-to-scent* (sesuai aslinya) di kulit Anda.",
-        "ritual": "Semprotkan di belakang lutut dan siku bagian dalam untuk *sillage* (jejak wangi) yang sopan namun elegan."
-    },
-    
-    "🍝 Karbohidrat Olahan & MSG (Mie Instan/Fast Food)": {
-        "mechanism": """
-        **Glicemic Spike & Oily Skin:** Lonjakan gula darah dan kandungan minyak jenuh memicu produksi sebum (minyak wajah/kulit). 
-        Parfum pada kulit berminyak bertahan lebih lama tapi *top notes*-nya bisa berubah menjadi apek jika oksidasi.
-        """,
-        "pairing_logic": "Anda butuh wangi yang 'Clean', 'Soapy', atau 'Powdery' untuk menetralkan kesan berminyak dan lengket.",
-        "recommended_notes": """
-        * **Top Notes:** Aldehydes (Wangi sabun), White Musk, Iris.
-        * **Heart/Base:** Cotton flower, Lily of the Valley.
-        * **Genre:** *Clean Laundry* atau *Powdery Floral*.
-        """,
-        "avoid_notes": "❌ **Heavy Spices (Cengkeh/Kayu Manis):** Akan membuat kesan tubuh semakin 'panas' dan tidak segar.",
-        "ritual": "Sedia *blooting paper* (kertas minyak) untuk wajah. Parfum tipe *Clean* sangat disarankan disemprot ulang tiap 4-5 jam."
-    }
+
+
+# --- HEADER APLIKASI ---
+
+st.markdown('<div class="main-header">✨ Scentara</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="sub-header">Harmonisasi Aroma Tubuh & Kuliner Nusantara</div>', unsafe_allow_html=True)
+
+
+
+# --- DATABASE LOGIKA (SAMA SEPERTI SEBELUMNYA - TIDAK BERUBAH) ---
+
+database_aroma = {
+
+    "--- PILIH KATEGORI MAKANAN ---": None,
+
+
+
+    # --- KATEGORI KHUSUS: PENGHILANG BAU (HALODOC) ---
+
+    "✨ [PENETRAL] Yoghurt & Susu (Probiotik)": {
+
+        "efek": "🍃 **Pembersih Alami:** Kandungan bakteri baik membantu mengurangi senyawa kolin dalam tubuh yang menyebabkan bau amis/tengik.",
+
+        "cocok": "🌸 **Floral Manis atau Soft Musk:** Kulit dalam kondisi bersih secara internal, wangi lembut akan terpancar sempurna.",
+
+        "larangan": "Tidak ada pantangan khusus. Parfum favoritmu akan tercium lebih 'true to scent'.",
+
+        "tips": "Konsumsi rutin untuk memperbaiki aroma alami tubuh jangka panjang."
+
+    },
+
+    "✨ [PENETRAL] Jeruk / Lemon / Buah Sitrus": {
+
+        "efek": "🍋 **Anti-Oksidan:** Asam sitrat membantu detoksifikasi racun yang keluar lewat pori-pori.",
+
+        "cocok": "🍃 **Fresh Aromatic atau Tea-based scents:** Menambah kesan segar dan energik.",
+
+        "larangan": "Parfum yang terlalu 'Oud' atau berat mungkin terasa terlalu kontras dengan kesegaran tubuhmu.",
+
+        "tips": "Minum air lemon hangat setiap pagi sangat membantu detoks aroma tubuh."
+
+    },
+
+    "✨ [PENETRAL] Green Tea (Teh Hijau)": {
+
+        "efek": "🍵 **Polifenol:** Menangkal bakteri penyebab bau badan langsung dari dalam sistem metabolisme.",
+
+        "cocok": "🌬️ **Aquatic atau Ozonic:** Memberikan kesan 'bersih' seperti baru selesai mandi.",
+
+        "larangan": "Hampir tidak ada.",
+
+        "tips": "Pilihan terbaik jika kamu ingin tampil dengan 'Clean Girl/Boy Aesthetic'."
+
+    },
+
+
+
+    "🌶️ Seblak / Bakso Aci / Sambal Setan (Pedas Ekstrem & Bawang)": {
+
+        "efek": "💦 **Hyperhidrosis & Sulfur:** Keringat mengucur deras karena capsaicin (cabai). Bawang putih/merah melepaskan senyawa *allicin* lewat pori-pori (bau tengik).",
+
+        "cocok": "🍋 **Citrus Kuat (Bergamot/Grapefruit) atau Aquatic:** Anda butuh kesegaran tajam untuk memotong aroma bawang dan mendinginkan kesan lengket.",
+
+        "larangan": "🍭 **Gourmand (Vanila/Cokelat/Karamel):** JANGAN! Aroma manis bercampur keringat bawang & pedas akan bikin pusing (enek) orang di sekitar.",
+
+        "tips": "Ganti baju jika keringat sudah tembus punggung. Parfum mahal pun tak bisa menutupi baju basah kuyup."
+
+    },
+
+    
+
+    "🫘 Jengkol / Pete / Durian (High Sulfur)": {
+
+        "efek": "⚠️ **Bahaya Kimiawi:** Mengandung senyawa sulfur (belerang) tinggi. Baunya tidak hanya di mulut, tapi keluar samar lewat pori-pori kulit & napas.",
+
+        "cocok": "🍃 **Aromatic Green, Mint, Eucalyptus, atau Tea:** Cari parfum yang wanginya 'bersih', 'dingin', dan herbal untuk menetralisir bau sulfur.",
+
+        "larangan": "🌹 **Tuberose (Sedap Malam) atau Animalic Musk:** Aroma yang terlalu 'hewani' atau bunga yang menyengat akan bertabrakan parah dengan sulfur.",
+
+        "tips": "Mandi dengan sabun antiseptik (Dettol/Lifebuoy) wajib hukumnya sebelum pakai parfum. Kunyah biji kopi atau permen mint kuat."
+
+    },
+
+    
+
+    "🦐 Sambal Terasi / Ikan Asin / Seafood": {
+
+        "efek": "🐟 **Aroma Amis/Fermentasi:** Protein laut dan fermentasi terasi bisa meninggalkan jejak aroma 'fishy' atau amis tipis pada keringat.",
+
+        "cocok": "🌊 **Marine, Sea Salt, atau Citrus Neroli:** Parfum bernuansa laut atau jeruk nipis sangat efektif menyamarkan aroma amis (seperti jeruk nipis pada ikan bakar).",
+
+        "larangan": "🦌 **Musk (Kesturi) Berat:** Musk bereaksi dengan aroma amis kulit menjadi bau yang 'kotor' dan tidak segar.",
+
+        "tips": "Cuci tangan dengan sabun stainless steel atau gosokkan lemon ke jari tangan sebelum menyentuh area leher."
+
+    },
+
+    
+
+    "🍢 Sate Kambing / Sop Kaki (Lemak Hewani Tinggi)": {
+
+        "efek": "🐐 **Keto-Scent:** Pencernaan daging merah berlemak menghasilkan residu amonia yang membuat keringat berbau tajam/pesing jika tidak biasa.",
+
+        "cocok": "🪵 **Sandalwood (Cendana) atau Spicy (Lada Hitam/Kapulaga):** Aroma kayu cendana yang creamy bisa menyeimbangkan tajamnya aroma residu daging.",
+
+        "larangan": "🍉 **Fruity (Semangka/Melon):** Aroma buah air yang manis akan terasa sangat artifisial dan aneh jika bercampur aroma lemak daging.",
+
+        "tips": "Gunakan deodoran *antiperspirant* (bukan cuma *deodorant*) yang mengandung aluminium klorida untuk menahan ketiak basah."
+
+    },
+
+    
+
+    "🥗 Gado-gado / Karedok / Sayur Asem (Bumbu Kacang & Sayur)": {
+
+        "efek": "✅ **Netral / Aman:** Sayuran dan bumbu kacang relatif aman. Kecuali jika terlalu banyak bawang mentah di bumbunya.",
+
+        "cocok": "🌼 **Floral, Fruity, atau Skin Scent:** Ini saatnya memakai parfum harian favoritmu yang ringan dan segar.",
+
+        "larangan": "❌ **Hampir Tidak Ada:** Tubuh dalam kondisi pH seimbang. Bebas eksplorasi wangi!",
+
+        "tips": "Kondisi aman. Semprot parfum di titik nadi (nadi tangan, belakang telinga) agar lebih menyebar."
+
+    },
+
+    
+
+    "🍜 Mie Instan / Gorengan (MSG & Minyak Goreng)": {
+
+        "efek": "🛢️ **Oily Sweat:** Kandungan pengawet dan minyak jenuh membuat kulit terasa lebih berminyak, parfum jadi cepat menguap (tidak tahan lama).",
+
+        "cocok": "Eau de Parfum (EDP) konsentrasi tinggi. Pilih wangi **Clean Laundry / Aldehyde** (Wangi sabun/baju bersih).",
+
+        "larangan": "Eau de Cologne (EDC) alkohol tinggi: Akan makin cepat hilang.",
+
+        "tips": "Gunakan *body lotion* tanpa wangi dulu di kulit agar parfum lebih menempel di kulit berminyak."
+
+    },
+
+    
+
+    # --- MAKANAN SUMATERA ---
+
+    "🍛 [SUMATERA] Rendang, Mie Aceh, Gulai Malbi": {
+
+        "efek": "🔥 **Rempah Sangat Kuat:** Campuran lada, kapulaga, dan santan kental membuat keringat lebih tajam dan berminyak.",
+
+        "cocok": "🪵 **Woody, Amber, atau Tobacco:** Notes berat ini 'merangkul' aroma rempah tubuh menjadi kesan eksotis.",
+
+        "larangan": "Citrus tipis (akan bau kecut) atau Floral murni (jadi apek).",
+
+        "tips": "Fokus semprot parfum di titik nadi yang jauh dari area berkeringat banyak."
+
+    },
+
+    "🐟 [SUMATERA] Pempek, Tempoyak, Arsik Ikan": {
+
+        "efek": "🦐 **Asam & Amis:** Cuka (Cuko) dan fermentasi ikan/durian meninggalkan jejak aroma asam yang persisten.",
+
+        "cocok": "🍊 **Citrus Sharp (Bergamot/Neroli):** Aroma jeruk tajam sangat efektif memotong bau amis.",
+
+        "larangan": "Vanilla atau Caramel (perpaduan asam cuka + manis bisa bikin mual).",
+
+        "tips": "Gunakan sabun cuci tangan anti-amis sebelum memegang area leher."
+
+    },
+
+
+
+    # --- MAKANAN JAWA ---
+
+    "🥘 [JAWA] Rawon, Gudeg, Selat Solo": {
+
+        "efek": "🟤 **Earthy & Sweet:** Kluwak (Rawon) memberikan efek 'earthy' pada keringat, sementara Gudeg cenderung netral namun manis.",
+
+        "cocok": "🍂 **Patchouli atau Sandalwood:** Menambah kesan elegan dan menyatu dengan aroma alami kulit yang hangat.",
+
+        "larangan": "Parfum aroma Permen (Candy) yang terlalu sintetis.",
+
+        "tips": "Rawon memiliki aroma kuat, pastikan sirkulasi udara baik saat makan agar bau tidak menempel di baju."
+
+    },
+
+    "🍜 [JAWA] Bakso, Mie Ayam, Soto Lamongan": {
+
+        "efek": "🧅 **Bawang Goreng & Seledri:** Residu bawang putih dalam kuah bisa tercium samar lewat pori-pori.",
+
+        "cocok": "🧼 **Clean Laundry atau Soap-like scents:** Menetralkan kesan 'oily' setelah makan mie kuah.",
+
+        "larangan": "Parfum rempah berat (Spicy).",
+
+        "tips": "Lap keringat di area wajah/leher segera setelah makan kuah panas."
+
+    },
+
+
+
+    # --- MAKANAN BALI, NTB, NTT ---
+
+    "🌶️ [BALI/NUSA] Ayam Betutu, Plecing Kangkung, Se'i Sapi": {
+
+        "efek": "🌋 **Pedas Panas & Asap:** Base genep (Bali) dan aroma asap (Se'i) sangat dominan meresap ke dalam pori-pori.",
+
+        "cocok": "🔥 **Incense, Vetiver, atau Spices:** Jika tubuhmu beraroma asap, parfum smoky justru akan tercium sangat maskulin/karismatik.",
+
+        "larangan": "Aquatic yang terlalu 'berair'.",
+
+        "tips": "Gunakan body mist yang segar di baju, tapi parfum woody di kulit."
+
+    },
+
+
+
+    # --- MAKANAN KALIMANTAN & SULAWESI ---
+
+    "🥥 [KAL/SUL] Soto Banjar, Coto Makassar, Konro": {
+
+        "efek": "🥜 **Nutty & Savory:** Kandungan kacang dan kayu manis dalam bumbu membuat aroma tubuh terasa 'gurih'.",
+
+        "cocok": "🍦 **Gourmand (Semi-sweet) atau Spicy Amber:** Menciptakan aura yang hangat dan ramah.",
+
+        "larangan": "Floral Rose yang terlalu kewanitaan.",
+
+        "tips": "Aroma Coto sangat kuat, disarankan menyemprot parfum *setelah* selesai makan."
+
+    },
+
+
+
+    # --- MAKANAN PAPUA & MALUKU ---
+
+    "🥣 [PAPUA/MALUKU] Papeda, Ikan Kuah Kuning": {
+
+        "efek": "🍋 **Acidic & Fresh:** Cenderung lebih aman karena minim lemak trans, namun kunyit pada kuah kuning memiliki efek panas.",
+
+        "cocok": "🌿 **Herbal atau White Floral:** Cocok dengan karakter makanan yang segar dari alam.",
+
+        "larangan": "Leather (Kulit) yang terlalu berat.",
+
+        "tips": "Kondisi tubuh cenderung netral, parfum apapun akan bekerja dengan baik."
+
+    }
+
 }
 
-# --- HEADER ---
-st.markdown('<div class="main-header">SCENTARA</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-header">Premium Personal Scent Consultant</div>', unsafe_allow_html=True)
 
-# --- INPUT SECTION ---
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    selected_menu = st.selectbox(
-        "Apa dominasi makanan Anda hari ini?",
-        ["-- Pilih Menu --"] + list(database_premium.keys())
-    )
 
-# --- LOGIKA UTAMA & TAMPILAN ---
-if selected_menu and selected_menu != "-- Pilih Menu --":
-    data = database_premium[selected_menu]
-    
-    st.markdown("---")
-    
-    # MENGGUNAKAN TABS UNTUK UI YANG LEBIH RAPI & INTERAKTIF
-    tab1, tab2, tab3 = st.tabs(["🔬 Analisa Molekuler", "💎 Rekomendasi Parfum", "✨ Ritual Pemakaian"])
-    
-    with tab1:
-        st.markdown('<div class="result-card">', unsafe_allow_html=True)
-        st.markdown("### 🧬 Bagaimana Tubuh Bereaksi?")
-        st.info(data['mechanism'])
-        st.markdown(f"**Strategi Aroma:** {data['pairing_logic']}")
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-    with tab2:
-        st.markdown('<div class="result-card">', unsafe_allow_html=True)
-        col_rec, col_avoid = st.columns(2)
-        
-        with col_rec:
-            st.markdown("### ✅ Harmony Match")
-            st.success(data['recommended_notes'])
-            
-        with col_avoid:
-            st.markdown("### ⛔ Clashing Notes")
-            st.error(data['avoid_notes'])
-            
-        st.markdown("#### 💡 Scentara Pro Tip:")
-        st.markdown("Jika Anda tidak memiliki parfum dengan notes spesifik di atas, carilah parfum dengan label warna botol yang senada (Misal: Citrus biasanya botol kuning/hijau muda, Woody botol cokelat/hitam).")
-        st.markdown('</div>', unsafe_allow_html=True)
+# --- BAGIAN INPUT USER ---
 
-    with tab3:
-        st.markdown('<div class="result-card">', unsafe_allow_html=True)
-        st.markdown("### 🧖 Ritual Aplikasi (Longevity Hack)")
-        st.warning(data['ritual'])
-        st.markdown("""
-        **Panduan Titik Semprot:**
-        1.  **Nadi Leher:** Untuk *projection* (agar orang lain mencium).
-        2.  **Belakang Telinga:** Agar wangi bertahan saat berpelukan/cipika-cipiki.
-        3.  **Baju (Bahu):** Agar wangi tidak bereaksi dengan kimia keringat (Safe zone).
-        """)
-        st.markdown('</div>', unsafe_allow_html=True)
+st.markdown("### 🔍 Cek Reaksi Aroma")
 
-    # --- SECTION AFFILIATE YANG LEBIH ELEGANT ---
-    st.markdown("---")
-    st.subheader("🛍️ Curated Collections for You")
-    st.write("Berdasarkan analisa profil aroma Anda hari ini, berikut adalah rekomendasi produk lokal terbaik yang telah kami kurasi:")
-    
-    c1, c2, c3 = st.columns(3)
-    
-    # Logika Tampilan Produk (Bisa disesuaikan linknya)
-    if "Daging" in selected_menu or "Rempah" in selected_menu:
-        with c1:
-            st.image("https://down-id.img.susercontent.com/file/id-11134207-7r98o-lty68p0h4z6f13", caption="Saff & Co - SOTB (Spicy & Bold)")
-            st.link_button("Lihat Produk", "https://shopee.co.id/Saff-Co-Extrait-de-Parfum-SOTB-30ml-i.294337637.3168246473")
-        with c2:
-            st.image("https://down-id.img.susercontent.com/file/id-11134207-7r98r-lsm5h4k8k8j790", caption="HMNS - Alpha (Green Tea & Woody)")
-            st.link_button("Lihat Produk", "https://shopee.co.id/HMNS-Perfume-Alpha-100ml-i.168973347.2628434774")
-    elif "Seafood" in selected_menu or "MSG" in selected_menu:
-         with c1:
-            st.image("https://down-id.img.susercontent.com/file/id-11134207-7qul6-lfz5r5x5q3b266", caption="Onix - Mexicola (Fresh Citrus)")
-            st.link_button("Lihat Produk", "https://shopee.co.id/Onix-Parfum-Mexicola-50ml-i.273663363.6338576402")
-    else:
-         with c1:
-            st.image("https://down-id.img.susercontent.com/file/sg-11134201-22100-24y444y444jv40", caption="Lilith & Eve - Daisy (Clean Floral)")
-            st.link_button("Lihat Produk", "https://shopee.co.id/Lilith-Eve-Daisy-Eau-De-Parfum-i.679237666.14364234024")
+selected_food = st.selectbox(
 
-    st.info("ℹ️ *Produk di atas adalah rekomendasi Official Store yang terjamin keasliannya.*")
+    "Pilih atau cari makanan yang kamu konsumsi hari ini:",
 
-else:
-    # TAMPILAN AWAL SEBELUM MEMILIH
-    st.markdown("""
-    <div style="text-align: center; margin-top: 50px; padding: 40px; background: rgba(255,255,255,0.05); border-radius: 10px;">
-        <h3>👋 Selamat Datang di Scentara Premium</h3>
-        <p>Aplikasi ini menggunakan pendekatan kimiawi untuk menyelaraskan aroma parfum dengan metabolisme tubuh Anda setelah makan.</p>
-        <p>Silakan pilih menu makanan Anda di atas untuk memulai konsultasi.</p>
-    </div>
-    """, unsafe_allow_html=True)
+    list(database_aroma.keys())
+
+)
+
+
+
+# --- BAGIAN LOGIKA & OUTPUT ---
+
+if selected_food and selected_food != "--- PILIH KATEGORI MAKANAN ---":
+
+    data = database_aroma[selected_food]
+
+    
+
+    st.divider()
+
+    st.subheader(f"Hasil Analisa: {selected_food}")
+
+    
+
+    # Kotak-kotak ini sekarang punya efek transparan (Glassmorphism)
+
+    st.info(data["efek"])
+
+    
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        st.success(f"✅ **COCOK:**\n\n{data['cocok']}")
+
+    with col2:
+
+        st.error(f"❌ **HINDARI:**\n\n{data['larangan']}")
+
+        
+
+    st.warning(f"💡 **TIPS EXTRA:**\n{data['tips']}")
+
+
+
+# --- LOGIKA TOMBOL AFFILIATE OTOMATIS (VERSI LENGKAP) ---
+
+st.markdown("### 🛍️ Rekomendasi Parfum Untukmu")
+
+
+
+# Mapping Keyword Makanan ke Produk Spesifik (Range 100k - 200k)
+
+affiliate_links = {
+
+    # Kelompok Bakso, Mie Ayam, Mie Goreng, Nasi Goreng (Masalah: Bau Lemak & Bawang Goreng)
+
+    "Bakso": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+
+    "Mie Ayam": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+
+    "Nasi Goreng": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+
+    "Mie Goreng": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+
+    "Bakmi": ("Onix - Call Me Bento", "https://s.shopee.co.id/30iOYLK1yK"),
+
+    
+
+    # Kelompok Rempah Berat
+
+    "Rendang": ("Nifty Twice - True Oud", "https://s.shopee.co.id/1LaAZQDs7a"),
+
+    "Gulai": ("Nifty Twice - True Oud", "https://s.shopee.co.id/1LaAZQDs7a"),
+
+    
+
+    # Kelompok Pedas Panas (Masalah: Keringat Berlebih)
+
+    "Seblak": ("Octarine - Bulgy Aqua", "https://s.shopee.co.id/8zzbhez88C"),
+
+    "Sambal": ("Octarine - Bulgy Aqua", "https://s.shopee.co.id/8zzbhez88C"),
+
+    
+
+    # Kelompok Bau Tajam
+
+    "Jengkol": ("Uchi - Green Tea", "https://s.shopee.co.id/3fy5M0SrNA"),
+
+    "Pete": ("Uchi - Green Tea", "https://s.shopee.co.id/3fy5M0SrNA"),
+
+    
+
+    # Kelompok Amis
+
+    "Seafood": ("Bali Surfers - Blue Point", "https://s.shopee.co.id/8fMlJHpOHj"),
+
+    "Pempek": ("Bali Surfers - Blue Point", "https://s.shopee.co.id/8fMlJHpOHj"),
+
+    
+
+    # Kelompok Kambing/Daging
+
+    "Sate Kambing": ("Carl & Claire - Black Orchid", "https://s.shopee.co.id/gKTmg8xxw"),
+
+    "Konro": ("Carl & Claire - Black Orchid", "https://s.shopee.co.id/gKTmg8xxw"),
+
+
+
+    # Kelompok Sayuran & Bumbu Kacang (Masalah: Bau Bawang Putih Mentah & Gurih Kacang)
+
+    "Gado-gado": ("Mine. Perfumery - Floratopia", "https://s.shopee.co.id/8pgBW79rHy"),
+
+    "Karedok": ("Mine. Perfumery - Floratopia", "https://s.shopee.co.id/8pgBW79rHy"),
+
+    "Lotek": ("Mine. Perfumery - Floratopia", "https://s.shopee.co.id/8pgBW79rHy"),
+
+    "Sayur": ("Mine. Perfumery - Floratopia", "https://s.shopee.co.id/8pgBW79rHy"),
+
+}
+
+
+
+# Cek apakah ada kata kunci di dalam 'selected_food' yang cocok dengan database affiliate
+
+found_link = False
+
+for key in affiliate_links:
+
+    if key.lower() in selected_food.lower():
+
+        name, url = affiliate_links[key]
+
+        st.write(f"Setelah makan **{key}**, tubuhmu butuh penetral aroma. Coba ini:")
+
+        st.link_button(f"🚀 Beli {name} di Shopee", url)
+
+        found_link = True
+
+        break
+
+
+
+if not found_link:
+
+    # Menggunakan link Toko Resmi HMNS yang sudah jadi affiliate
+
+    st.write("Makananmu cenderung netral, tapi tetap tampil wangi dengan pilihan terbaik dari brand lokal terpopuler:")
+
+    st.link_button("✨ Lihat Koleksi Parfum HMNS (Shopee Mall)", "https://s.shopee.co.id/7fUE9iRwGr")
+
+    
+
+# --- DISCLAIMER (Sesuai Permintaan) ---
+
+st.markdown(f"""
+
+    <div class="disclaimer-box">
+
+        <b>PENTING:</b> Aplikasi <b>Scentara</b> dibuat semata-mata sebagai panduan gaya hidup untuk mengecek potensi perubahan aroma badan akibat reaksi kimia makanan. 
+
+        Aplikasi ini <b>SAMA SEKALI TIDAK</b> bermaksud melarang pengguna untuk mengonsumsi makanan yang disukai. 
+
+        Kekayaan kuliner Nusantara adalah warisan yang patut dinikmati; kami hanya membantu Anda tetap tampil wangi setelah menikmatinya.
+
+    </div>
+
+""", unsafe_allow_html=True)
+
+
 
 # --- FOOTER ---
-st.markdown("""
-    <div class="disclaimer">
-        <b>Scentara Premium v3.1</b><br>
-        All rights reserved. Data based on perfume chemistry principles & dermatology research.<br>
-        <i>Disclaimer: Hasil reaksi bisa berbeda tergantung genetika dan kondisi hormon individu.</i>
-    </div>
-""", unsafe_allow_html=True
+
+st.divider()
+
+st.caption("Scentara v2.0 (Premium Style) | Data diriset dari berbagai sumber kesehatan dan komunitas pecinta parfum Indonesia.")
