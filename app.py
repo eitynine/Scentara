@@ -2,21 +2,21 @@ import streamlit as st
 
 # --- KONFIGURASI HALAMAN ---
 st.set_page_config(
-    page_title="Scentara Premium - The Scent Sommelier",
+    page_title="Scentara Premium",
     page_icon="💎",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
 # ==========================================
-#  CUSTOM CSS: DEEP MIDNIGHT & HIGH CONTRAST
+#  CUSTOM CSS (VARIABLE DEFINITION)
 # ==========================================
-st.markdown("""
+custom_css = """
     <style>
-    /* IMPORT FONT MEWAH */
+    /* IMPORT FONT */
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@300;400;700&display=swap');
 
-    /* 1. BACKGROUND GRADASI DEEP (Agar teks putih terbaca jelas) */
+    /* 1. BACKGROUND GRADASI DEEP */
     .stApp {
         background: linear-gradient(180deg, #020010 0%, #080C1F 50%, #111827 100%);
         color: #FFFFFF;
@@ -50,15 +50,15 @@ st.markdown("""
         color: white !important;
         border-radius: 8px;
     }
-    /* Warna teks dropdown item */
+    /* Dropdown items */
     div[data-baseweb="select"] ul {
         background-color: #0F172A !important;
         color: white !important;
     }
 
-    /* 4. RESULT CARDS (BASE HITAM TRANSPARAN) */
+    /* 4. RESULT CARDS */
     .result-card {
-        background: rgba(0, 0, 0, 0.6); /* Lebih gelap agar teks pop */
+        background: rgba(0, 0, 0, 0.6);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border-radius: 12px;
@@ -68,7 +68,7 @@ st.markdown("""
         box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
     
-    /* 5. TYPOGRAPHY DALAM CARD */
+    /* 5. TYPOGRAPHY */
     h3 { color: #FF8BA7 !important; font-family: 'Playfair Display', serif; margin-bottom: 15px; }
     h4 { color: #E5E7EB !important; font-weight: 700; margin-top: 10px; }
     p, li { line-height: 1.7; color: #D1D5DB; font-size: 1rem; }
@@ -107,4 +107,41 @@ st.markdown("""
     .disclaimer {
         font-size: 0.75rem;
         color: #6B7280;
-        text-align:
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #1F2937;
+    }
+    </style>
+"""
+st.markdown(custom_css, unsafe_allow_html=True)
+
+# --- DATABASE INTELEGENSIA AROMA ---
+database_premium = {
+    "🥩 Daging Merah & Berlemak (Sate/Steak/Rendang)": {
+        "mechanism": """
+        **Efek Thermogenesis:** Mencerna protein tinggi meningkatkan suhu tubuh.
+        Residu lemak dan asam amino menciptakan suasana kulit yang *basal* dan sedikit 'animalic'.
+        """,
+        "pairing_logic": "Gunakan wangi **Spicy & Woody** yang tebal untuk menyeimbangkan aroma natural tubuh yang sedang kuat.",
+        "recommended_notes": """
+        * **Utama:** Oud (Gaharu), Black Pepper, Leather.
+        * **Pendukung:** Patchouli, Saffron.
+        * **Vibe:** Mewah, Bold, Timur Tengah.
+        """,
+        "avoid_notes": "❌ **Vanilla Manis & Buah-buahan:** Akan bikin pusing jika campur keringat lemak.",
+        "ritual": "Semprot parfum di baju (bahu & dada) lebih banyak daripada di kulit langsung.",
+        "product_category": "bold"
+    },
+
+    "🧄 Bawang & Rempah Tajam (Kari/Gulai/Sambal)": {
+        "mechanism": """
+        **Senyawa Sulfur:** Aroma bawang keluar lewat pori-pori kulit selama 24 jam.
+        Ini membuat aroma tubuh menjadi 'hangat' dan tajam.
+        """,
+        "pairing_logic": "Lawan panas dengan dingin. Potong bau bawang dengan **Citrus Tajam** atau **Mint**.",
+        "recommended_notes": """
+        * **Utama:** Bergamot, Lemon, Peppermint.
+        * **Pendukung:** Vetiver (Akar Wangi), Ginger.
+        * **Vibe:** Segar, Bersih, Professional.
+        """,
