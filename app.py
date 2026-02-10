@@ -264,35 +264,35 @@ if selected_menu and selected_menu != "-- Pilih Menu --":
     if "Daging" in selected_menu or "Rempah" in selected_menu or "Kopi" in selected_menu:
         # Butuh: Woody, Oud, Spicy, Gourmand (Budget Friendly)
         with c1:
-            st.image("https://down-id.img.susercontent.com/file/id-11134207-7qul2-ljz5z7d5y9c822", caption="Kahf Revered Oud (Oud & Rose)")
+            st.image("https://down-tx-id.img.susercontent.com/sg-11134201-7repz-m8pwockowu4xed.webp", caption="Kahf Revered Oud (Oud & Rose)")
             # Harga rata-rata: Rp 70.000 - Rp 80.000
-            st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=kahf%20revered%20oud%20parfum")
+            st.link_button("Cari di Shopee", "https://s.shopee.co.id/8zzdHW7p5O")
         with c2:
-            st.image("https://down-id.img.susercontent.com/file/id-11134207-7r98o-lty68p0h4z6f13", caption="Saff & Co S.O.T.B (30ml)")
+            st.image("https://down-tx-id.img.susercontent.com/id-11134207-8224v-mgxa9h3mz0nj34.webp", caption="Saff & Co S.O.T.B (30ml)")
             # Harga rata-rata: Rp 189.000 - Rp 199.000 (Masuk Budget)
-            st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=saff%20co%20sotb%2030ml")
+            st.link_button("Cari di Shopee", "https://s.shopee.co.id/1LaC9bW5Jv")
             
     elif "Seafood" in selected_menu or "MSG" in selected_menu:
         # Butuh: Citrus, Fresh, Aquatic (Budget Friendly)
         with c1:
-             st.image("https://down-id.img.susercontent.com/file/id-11134207-7qukw-ljz5z7d65zqx66", caption="Kahf Humbling Forest (Cypress)")
-             # Harga rata-rata: Rp 70.000
-             st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=kahf%20humbling%20forest")
+             st.image("https://down-tx-id.img.susercontent.com/sg-11134201-821f1-mgn1jjovwkqx8e.webp", caption="Kahf Humbling Forest (Cypress)")
+             # Harga rata-rata: Rp 290.000
+             st.link_button("Cari di Shopee", "https://s.shopee.co.id/8KjwUbbP0s")
         with c2:
-             st.image("https://down-id.img.susercontent.com/file/sg-11134201-22120-2c7y444y444j33", caption="Romano Eau De Parfum Force")
+             st.image("https://down-tx-id.img.susercontent.com/id-11134207-7rasa-m2xw4u1vfht9bc.webp", caption="Romano Eau De Parfum Force")
              # Harga rata-rata: Rp 40.000 - Rp 50.000
-             st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=romano%20force%20parfum")
+             st.link_button("Cari di Shopee", "https://s.shopee.co.id/6fbiVeW7W6")
 
     else:
          # Butuh: Floral, Clean, Musky (Budget Friendly)
          with c1:
-            st.image("https://down-id.img.susercontent.com/file/sg-11134201-22100-24y444y444jv40", caption="Lilith & Eve Daisy (Floral Fresh)")
+            st.image("https://down-tx-id.img.susercontent.com/sg-11134201-23010-o3tc51tgjtlv80.webp", caption="Lilith & Eve Daisy (Floral Fresh)")
             # Harga rata-rata: Rp 78.000
-            st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=lilith%20and%20eve%20daisy")
+            st.link_button("Cari di Shopee", "https://s.shopee.co.id/9KcTgi9TPB")
          with c2:
-            st.image("https://down-id.img.susercontent.com/file/id-11134207-7r98u-lsm5h4k8lg3n12", caption="Pinkberry Eau De Parfum Wild Berry")
+            st.image("https://down-tx-id.img.susercontent.com/id-11134207-81zto-mentxgtm0ikn93.webp", caption="Pinkberry Eau De Parfum Wild Berry")
             # Harga rata-rata: Rp 50.000
-            st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=pinkberry%20parfum%20wild%20berry")
+            st.link_button("Cari di Shopee", "https://s.shopee.co.id/6pv8iCctu5")
 
     st.info("ℹ️ *Produk dipilih berdasarkan ketersediaan stok lokal dan harga di bawah Rp 200.000.*")
 
