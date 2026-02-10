@@ -1,6 +1,6 @@
 import streamlit as st
 
-# --- KONFIGURASI HALAMAN (PREMIUM TIER) ---
+# --- KONFIGURASI HALAMAN ---
 st.set_page_config(
     page_title="Scentara Premium - The Scent Sommelier",
     page_icon="💎",
@@ -9,69 +9,78 @@ st.set_page_config(
 )
 
 # ==========================================
-#  CUSTOM CSS: LUXURY & GLASSMORPHISM
+#  CUSTOM CSS: HIGH CONTRAST & LUXURY
 # ==========================================
 st.markdown("""
     <style>
     /* IMPORT FONT MEWAH */
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@300;400;700&display=swap');
 
-    /* 1. BACKGROUND GRADASI PREMIUM */
+    /* 1. BACKGROUND BARU (LEBIH GELAP & KONTRAS) */
     .stApp {
-        background: linear-gradient(160deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
-        color: #E0E0E0;
+        /* Menggunakan warna dasar Charcoal ke Hitam agar teks Putih terbaca jelas */
+        background: linear-gradient(135deg, #121212 0%, #232526 100%);
+        color: #F0F0F0;
         font-family: 'Lato', sans-serif;
     }
     
-    /* 2. HEADER STYLE */
+    /* 2. PERBAIKAN LABEL INPUT (Supaya terbaca jelas) */
+    .stSelectbox label p {
+        font-size: 1.2rem !important;
+        color: #FFFFFF !important; /* Warna Putih Mutlak */
+        font-weight: 700 !important; /* Tebal */
+        text-shadow: 0px 2px 4px rgba(0,0,0,0.8); /* Bayangan agar tidak samar */
+    }
+
+    /* 3. HEADER STYLE */
     .main-header {
         font-family: 'Playfair Display', serif;
         font-size: 3.8rem;
-        color: #E94560;
+        color: #D4AF37; /* Ganti ke Emas agar lebih terbaca di background gelap */
         text-align: center;
         font-weight: 700;
-        text-shadow: 0px 0px 20px rgba(233, 69, 96, 0.4);
+        text-shadow: 0px 0px 20px rgba(212, 175, 55, 0.4);
         margin-bottom: 0px;
     }
     .sub-header {
         font-size: 1.1rem;
         text-align: center;
-        color: #B2B2B2;
+        color: #CCCCCC;
         letter-spacing: 2px;
         margin-bottom: 3rem;
         text-transform: uppercase;
     }
 
-    /* 3. INPUT BOX STYLING */
+    /* 4. INPUT BOX STYLING */
     .stSelectbox > div > div {
-        background-color: rgba(255, 255, 255, 0.1) !important;
+        background-color: rgba(255, 255, 255, 0.15) !important;
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         color: white !important;
         border-radius: 8px;
     }
 
-    /* 4. RESULT CARDS (GLASSMORPHISM) */
+    /* 5. RESULT CARDS (GLASSMORPHISM) */
     .result-card {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(30, 30, 30, 0.6); /* Lebih gelap sedikit agar tulisan terbaca */
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border-radius: 15px;
         border: 1px solid rgba(255, 255, 255, 0.1);
         padding: 20px;
         margin-bottom: 20px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
     }
     
-    /* 5. TYPOGRAPHY DALAM CARD */
-    h3 { color: #E94560 !important; font-family: 'Playfair Display', serif; }
+    /* 6. TYPOGRAPHY DALAM CARD */
+    h3 { color: #D4AF37 !important; font-family: 'Playfair Display', serif; } /* Gold headers */
     h4 { color: #FFFFFF !important; margin-top: 10px; }
-    strong { color: #FFD700; } /* Warna Emas untuk penekanan */
+    strong { color: #FFD700; } 
 
-    /* 6. BUTTON CUSTOM */
+    /* 7. BUTTON CUSTOM */
     .stButton>button {
-        background: linear-gradient(90deg, #E94560 0%, #C81D48 100%);
-        color: white;
+        background: linear-gradient(90deg, #D4AF37 0%, #C5A028 100%); /* Gold Button */
+        color: black;
         border: none;
         border-radius: 25px;
         padding: 10px 25px;
@@ -80,13 +89,14 @@ st.markdown("""
     }
     .stButton>button:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(233, 69, 96, 0.6);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        color: white;
     }
     
     /* DISCLAIMER */
     .disclaimer {
         font-size: 0.8rem;
-        color: #666;
+        color: #888;
         text-align: center;
         margin-top: 50px;
         border-top: 1px solid #333;
@@ -95,14 +105,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- DATABASE INTELEGENSIA AROMA (EXPANDED & FACTUAL) ---
-# Format Data:
-# - mechanism: Penjelasan ilmiah (Biologi/Kimia)
-# - pairing_logic: Mengapa notes tertentu dipilih
-# - recommended_notes: Notes spesifik
-# - avoid_notes: Notes yang dilarang & alasannya
-# - ritual: Tips detail sebelum/sesudah pakai parfum
-
+# --- DATABASE INTELEGENSIA AROMA ---
 database_premium = {
     "🥩 Daging Merah & Berlemak (Sate Kambing/Rendang/Steak)": {
         "mechanism": """
@@ -212,7 +215,7 @@ if selected_menu and selected_menu != "-- Pilih Menu --":
     
     st.markdown("---")
     
-    # MENGGUNAKAN TABS UNTUK UI YANG LEBIH RAPI & INTERAKTIF
+    # MENGGUNAKAN TABS
     tab1, tab2, tab3 = st.tabs(["🔬 Analisa Molekuler", "💎 Rekomendasi Parfum", "✨ Ritual Pemakaian"])
     
     with tab1:
@@ -250,46 +253,63 @@ if selected_menu and selected_menu != "-- Pilih Menu --":
         """)
         st.markdown('</div>', unsafe_allow_html=True)
 
-    # --- SECTION AFFILIATE YANG LEBIH ELEGANT ---
+    # --- SECTION AFFILIATE (UPDATED: < 200rb) ---
     st.markdown("---")
-    st.subheader("🛍️ Curated Collections for You")
-    st.write("Berdasarkan analisa profil aroma Anda hari ini, berikut adalah rekomendasi produk lokal terbaik yang telah kami kurasi:")
+    st.subheader("🛍️ Curated Collections (Under 200K)")
+    st.write("Rekomendasi produk lokal & affordable terbaik sesuai profil Anda:")
     
     c1, c2, c3 = st.columns(3)
     
-    # Logika Tampilan Produk (Bisa disesuaikan linknya)
-    if "Daging" in selected_menu or "Rempah" in selected_menu:
+    # LOGIKA PRODUK BARU (HARGA TERJANGKAU & NAMA JELAS)
+    if "Daging" in selected_menu or "Rempah" in selected_menu or "Kopi" in selected_menu:
+        # Butuh: Woody, Oud, Spicy, Gourmand (Budget Friendly)
         with c1:
-            st.image("https://down-id.img.susercontent.com/file/id-11134207-7r98o-lty68p0h4z6f13", caption="Saff & Co - SOTB (Spicy & Bold)")
-            st.link_button("Lihat Produk", "https://shopee.co.id/Saff-Co-Extrait-de-Parfum-SOTB-30ml-i.294337637.3168246473")
+            st.image("https://down-id.img.susercontent.com/file/id-11134207-7qul2-ljz5z7d5y9c822", caption="Kahf Revered Oud (Oud & Rose)")
+            # Harga rata-rata: Rp 70.000 - Rp 80.000
+            st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=kahf%20revered%20oud%20parfum")
         with c2:
-            st.image("https://down-id.img.susercontent.com/file/id-11134207-7r98r-lsm5h4k8k8j790", caption="HMNS - Alpha (Green Tea & Woody)")
-            st.link_button("Lihat Produk", "https://shopee.co.id/HMNS-Perfume-Alpha-100ml-i.168973347.2628434774")
+            st.image("https://down-id.img.susercontent.com/file/id-11134207-7r98o-lty68p0h4z6f13", caption="Saff & Co S.O.T.B (30ml)")
+            # Harga rata-rata: Rp 189.000 - Rp 199.000 (Masuk Budget)
+            st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=saff%20co%20sotb%2030ml")
+            
     elif "Seafood" in selected_menu or "MSG" in selected_menu:
-         with c1:
-            st.image("https://down-id.img.susercontent.com/file/id-11134207-7qul6-lfz5r5x5q3b266", caption="Onix - Mexicola (Fresh Citrus)")
-            st.link_button("Lihat Produk", "https://shopee.co.id/Onix-Parfum-Mexicola-50ml-i.273663363.6338576402")
-    else:
-         with c1:
-            st.image("https://down-id.img.susercontent.com/file/sg-11134201-22100-24y444y444jv40", caption="Lilith & Eve - Daisy (Clean Floral)")
-            st.link_button("Lihat Produk", "https://shopee.co.id/Lilith-Eve-Daisy-Eau-De-Parfum-i.679237666.14364234024")
+        # Butuh: Citrus, Fresh, Aquatic (Budget Friendly)
+        with c1:
+             st.image("https://down-id.img.susercontent.com/file/id-11134207-7qukw-ljz5z7d65zqx66", caption="Kahf Humbling Forest (Cypress)")
+             # Harga rata-rata: Rp 70.000
+             st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=kahf%20humbling%20forest")
+        with c2:
+             st.image("https://down-id.img.susercontent.com/file/sg-11134201-22120-2c7y444y444j33", caption="Romano Eau De Parfum Force")
+             # Harga rata-rata: Rp 40.000 - Rp 50.000
+             st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=romano%20force%20parfum")
 
-    st.info("ℹ️ *Produk di atas adalah rekomendasi Official Store yang terjamin keasliannya.*")
+    else:
+         # Butuh: Floral, Clean, Musky (Budget Friendly)
+         with c1:
+            st.image("https://down-id.img.susercontent.com/file/sg-11134201-22100-24y444y444jv40", caption="Lilith & Eve Daisy (Floral Fresh)")
+            # Harga rata-rata: Rp 78.000
+            st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=lilith%20and%20eve%20daisy")
+         with c2:
+            st.image("https://down-id.img.susercontent.com/file/id-11134207-7r98u-lsm5h4k8lg3n12", caption="Pinkberry Eau De Parfum Wild Berry")
+            # Harga rata-rata: Rp 50.000
+            st.link_button("Cari di Shopee", "https://shopee.co.id/search?keyword=pinkberry%20parfum%20wild%20berry")
+
+    st.info("ℹ️ *Produk dipilih berdasarkan ketersediaan stok lokal dan harga di bawah Rp 200.000.*")
 
 else:
     # TAMPILAN AWAL SEBELUM MEMILIH
     st.markdown("""
-    <div style="text-align: center; margin-top: 50px; padding: 40px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+    <div style="text-align: center; margin-top: 50px; padding: 40px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
         <h3>👋 Selamat Datang di Scentara Premium</h3>
-        <p>Aplikasi ini menggunakan pendekatan kimiawi untuk menyelaraskan aroma parfum dengan metabolisme tubuh Anda setelah makan.</p>
-        <p>Silakan pilih menu makanan Anda di atas untuk memulai konsultasi.</p>
+        <p style="color: #ddd;">Aplikasi ini menggunakan pendekatan kimiawi untuk menyelaraskan aroma parfum dengan metabolisme tubuh Anda setelah makan.</p>
+        <p style="color: #fff; font-weight: bold;">Silakan pilih menu makanan Anda di atas untuk memulai konsultasi.</p>
     </div>
     """, unsafe_allow_html=True)
 
 # --- FOOTER ---
 st.markdown("""
     <div class="disclaimer">
-        <b>Scentara Premium v3.1</b><br>
+        <b>Scentara Premium v3.2</b><br>
         All rights reserved. Data based on perfume chemistry principles & dermatology research.<br>
         <i>Disclaimer: Hasil reaksi bisa berbeda tergantung genetika dan kondisi hormon individu.</i>
     </div>
